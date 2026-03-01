@@ -452,8 +452,8 @@ class FPSUtility(tk.Tk):
 
         # Stats row
         stats_f = tk.Frame(p, bg=BG)
-        stats_f.pack(fill="x", **pad, pady=(16, 8))
-
+       pad = dict(padx=20, pady=4)
+stats_f.pack(fill="x", **pad, pady=(16, 8))
         tweaks_on = sum(1 for t in TWEAKS
                         if self.tweak_vars.get(t["id"], tk.BooleanVar(value=True)).get())
 
