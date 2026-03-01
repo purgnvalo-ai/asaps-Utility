@@ -1,0 +1,39 @@
+name: Build FPS Utility Lite .exe
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install PyInstaller
+        run: pip install pyinstaller
+
+      - name: Build .exe
+        run: |
+          pyinstaller `
+            --onefile `
+            --windowed `
+            --name "FPS Utility Lite" `
+            --uac-admin `
+            --clean `
+            main.py
+
+      - name: Upload .exe as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: FPS-Utility-Lite
+          path: dist/FPS Utility Lite.exe
+          retention-days: 90
